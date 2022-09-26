@@ -43,15 +43,15 @@ class Contact
 
      * @param {string} [fullName="unknown name"]
      * @param {string} [contactNumber="no contact number"]
-     * @param {string} [emailAdress="unknown email address"]
+     * @param {string} [emailAddress="unknown email address"]
      * @memberof Contact
      */
     constructor(fullName: string = "unknown name", contactNumber: string = "no contact number", 
-    emailAdress: string = "unknown email address")
+    emailAddress: string = "unknown email address")
     {
         this.FullName = fullName;
         this.ContactNumber = contactNumber;
-        this.EmailAddress = emailAdress;
+        this.EmailAddress = emailAddress;
     }
 
     // public methods
@@ -68,6 +68,30 @@ class Contact
         outputString += `Contact Number: ${this.ContactNumber}\n`;
         outputString += `Email Address : ${this.EmailAddress}\n`;
         return outputString;
+    }
+
+    /**
+     * This method converts class Data Members to a comma-separated list compatible with JSON
+     *
+     * @returns {string}
+     * @memberof Contact
+     */
+    public toJSON():string
+    {
+        return `${this.FullName}, ${this.ContactNumber}, ${this.EmailAddress}`;
+    }
+
+    /**
+     * This method reads data from a comma-separated list and assigns it to class Data Members
+     *
+     * @param {string} data
+     * @memberof Contact
+     */
+    public fromJSON(data: any):void
+    {
+        this.FullName = data.FullName;
+        this.ContactNumber = data.ContactNumber;
+        this.EmailAddress = data.EmailAddress;
     }
 
     // private methods
